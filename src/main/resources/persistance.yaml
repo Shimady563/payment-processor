@@ -1,0 +1,23 @@
+---
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${db.url:localhost:5432}/payment?application_name=${spring.application.name:unknown}
+    username: ${db.username:payment_user}
+    password: ${db.password:payment_user}
+    hikari:
+      schema: ${db.schema:payment}
+      data-source-properties:
+        reWriteBatchedInserts: true
+  jpa:
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        ddl-auto: validate
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          batch_size: ${db.properties.batch_size:20}
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml

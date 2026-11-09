@@ -1,0 +1,23 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: payment-processor
+  config:
+    import: >
+      persistance.yaml
+
+server:
+  servlet:
+    context-path: /api/v1
+  port: ${application.port:8080}
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
