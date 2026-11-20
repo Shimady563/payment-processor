@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /api/v1
+
+spring:
+  datasource:
+    hikari:
+      schema: test
+  liquibase:
+    change-log: classpath:db/changelog/test-changelog-master.xml
+    default-schema: test
+    enabled: true
+
+security:
+  jwt:
+    auth:
+      converter:
+        resource-id: test-client
+        principal-attribute: preferred_username
+        roles-to-permissions:
+          user:
+            - READ_USER_INFO
+          admin:
+            - READ_USER_INFO
+
+logging:
+  level:
+    root: debug
+    org.springframework.security: debug
+    com.shimady.payment.processor: debug

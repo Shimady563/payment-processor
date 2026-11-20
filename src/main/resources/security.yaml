@@ -1,0 +1,22 @@
+---
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${SECURITY_KEYCLOAK_URL:http://localhost:8081/realms/payment}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+security:
+  whitelist: ${SECURITY_WHITELIST:/swagger-ui.html, /swagger-ui/**, /v3/api-docs/**, /actuator, /actuator/**}
+  allowed-origins: ${SECURITY_ALLOWED_ORIGINS:http://localhost:8080}
+  jwt:
+    auth:
+      converter:
+        resource-id: ${SECURITY_KEYCLOAK_CLIENT_RESOURCE_ID:payment-processor}
+        principal-attribute: ${SECURITY_KEYCLOAK_CLIENT_PRINCIPAL_ATTRIBUTE:preferred_username}
+        roles-to-permissions:
+          user:
+            - READ_USER_INFO
+          admin:
+            - READ_USER_INFO

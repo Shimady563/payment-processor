@@ -2,22 +2,25 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${db.url:localhost:5432}/payment?application_name=${spring.application.name:unknown}
-    username: ${db.username:payment_user}
-    password: ${db.password:payment_user}
+    url: jdbc:postgresql://${DB_URL:localhost:5433}/${DB_NAME:payment}?currentSchema=${DB_SCHEMA:payment}&application_name=${spring.application.name:unknown}
+    username: ${DB_USERNAME:payment_user}
+    password: ${DB_PASSWORD:payment_user}
     hikari:
-      schema: ${db.schema:payment}
+      schema: ${DB_SCHEMA:payment}
       data-source-properties:
-        reWriteBatchedInserts: true
+        reWriteBatchedInserts: ${DB_HIKARI_RE_WRITE_BATCHED_INSERTS:true}
   jpa:
     show-sql: false
     open-in-view: false
     properties:
       hibernate:
         ddl-auto: validate
-        order_inserts: true
-        order_updates: true
+        order_inserts: ${DB_HIBERNATE_ORDER_INSERTS:true}
+        order_updates: ${DB_HIBERNATE_ORDER_UPDATES:true}
+        batch_versioned_data: ${DB_HIBERNATE_BATCH_VERSIONED_DATA:true}
         jdbc:
-          batch_size: ${db.properties.batch_size:20}
+          batch_size: ${DB_JDBC_BATCH_SIZE:50}
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
+    default-schema: ${DB_SCHEMA:payment}
+    enabled: ${DB_LIQUIBASE_ENABLED:true}
