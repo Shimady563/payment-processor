@@ -3,21 +3,25 @@ spring:
     banner-mode: off
   application:
     name: payment-processor
+  profiles:
+    include: ${PROFILES_INCLUDE:local}
   config:
     import: >
-      persistance.yaml
+      persistance.yaml,
+      security.yaml
 
 server:
   servlet:
-    context-path: /api/v1
-  port: ${application.port:8080}
+    context-path: ${SERVER_BASEPATH:/api/v1}
+  port: ${SERVER_PORT:8080}
 
 logging:
   level:
     root: info
+    com.shimady.payment.processor: ${LOGGING_LEVEL_BASEPACKAGE:debug}
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: ${ACTUATOR_ENDPOINTS_INCLUDE:health,info,metrics}
