@@ -1,0 +1,7 @@
+springdoc:
+  api-docs:
+    enabled: ${APIDOCS_ENABLED:true}
+  swagger-ui:
+    path: ${APIDOCS_SWAGGER_PATH:/swagger-ui.html}
+    disable-swagger-default-url: ${APIDOCS_SWAGGER_DISABLE_DEFAULT_URL:true}
+    enabled: ${APIDOCS_SWAGGER_ENABLED:true}
