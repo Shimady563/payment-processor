@@ -1,0 +1,85 @@
+{
+  "realm": "test",
+  "displayName": "Test Realm",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "accessTokenLifespan": 3600,
+  "roles": {
+    "realm": [
+      {
+        "name": "app_admin",
+        "description": "Administrator realm role"
+      },
+      {
+        "name": "app_user",
+        "description": "User realm role"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "test-client",
+      "name": "Test client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost*"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "test-admin",
+      "enabled": true,
+      "email": "test-admin@example.com",
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "Administrator",
+      "realmRoles": [
+        "app_admin"
+      ],
+      "clientRoles": {
+        "test-client": [
+          "admin"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test-admin-password",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "test-user",
+      "enabled": true,
+      "email": "test-user@example.com",
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "User",
+      "realmRoles": [
+        "app_user"
+      ],
+      "clientRoles": {
+        "test-client": [
+          "user"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test-password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}
