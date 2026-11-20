@@ -1,0 +1,85 @@
+{
+  "realm": "payment",
+  "displayName": "Payment Processor",
+  "enabled": true,
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "accessTokenLifespan": 3600,
+  "roles": {
+    "realm": [
+      {
+        "name": "payment_admin",
+        "description": "Payment Processor administrator"
+      },
+      {
+        "name": "payment_user",
+        "description": "Payment Processor user"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "payment-processor",
+      "name": "Payment Processor local client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:8080/*"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Payment",
+      "lastName": "Administrator",
+      "email": "admin@example.com",
+      "realmRoles": [
+        "payment_admin"
+      ],
+      "clientRoles": {
+        "payment-processor": [
+          "admin"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin-password",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Payment",
+      "lastName": "User",
+      "email": "user@example.com",
+      "realmRoles": [
+        "payment_user"
+      ],
+      "clientRoles": {
+        "payment-processor": [
+          "user"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user-password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}
